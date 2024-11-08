@@ -1,11 +1,11 @@
 const Room = require('../models/room');
 
 const addOccupantToRoom = async (req, res) => {
-    const { roomId } = req.params;
+    const { roomNumber } = req.params;
     const { name, role, skillSet, gender } = req.body;
 
     try {
-        const room = await Room.findById(roomId);
+        const room = await Room.findOne({ roomNumber });
 
         if (!room) return res.status(404).json({ message: 'Room not found' });
 
