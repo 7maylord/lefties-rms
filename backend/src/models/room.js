@@ -9,6 +9,7 @@ const OccupantSchema = new mongoose.Schema({
 
 const RoomSchema = new mongoose.Schema({
     name: String,
+    capacity: { type: Number, default: 4 },
     occupants: [OccupantSchema],
     genderAssigned: { type: String, enum: ['male', 'female'], default: null },
 });
