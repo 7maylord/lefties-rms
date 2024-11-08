@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { axiosInstance } from '../axiosInstance';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const RoomManager = () => {
     const [rooms, setRooms] = useState([]);
@@ -12,18 +13,40 @@ const RoomManager = () => {
     }, []);
 
     const fetchRooms = async () => {
-        const res = await axiosInstance.get('/rooms');
-        setRooms(res.data);
+        try {
+            const res = await axiosInstance.get('/rooms');
+            setRooms(res.data);
+        } catch (err) {
+            setError('Error fetching rooms');
+        }
     };
 
     const addOccupant = async (roomNumber) => {
         try {
             const res = await axiosInstance.post(`/rooms/${roomNumber}/addOccupant`, form);
+            // Update room in the state with the new occupant
             setRooms(rooms.map(room => (room.roomNumber === roomNumber ? res.data : room)));
             setForm({ name: '', role: 'developer', skillSet: 'smartContract', gender: 'male' });
             setError('');
         } catch (err) {
             setError(err.response.data.message);
+        }
+    };
+
+    const deleteOccupant = async (roomNumber, occupantId) => {
+        try {
+            await axiosInstance.delete(`/rooms/${roomNumber}/occupants/${occupantId}`);
+            // Update room state after deleting occupant
+            setRooms(rooms.map(room => 
+                room.roomNumber === roomNumber ? {
+                    ...room,
+                    occupants: room.occupants.filter(occupant => occupant.id !== occupantId),
+                    genderAssigned: room.occupants.length === 0 ? null : room.genderAssigned 
+                } : room
+            ));
+            alert('Occupant deleted successfully.');
+        } catch (err) {
+            setError(err.response ? err.response.data.message : 'An error occurred');
         }
     };
 
@@ -36,8 +59,16 @@ const RoomManager = () => {
                     <p>Gender Assigned: {room.genderAssigned || 'None'}</p>
                     <ul>
                         {room.occupants.map((occupant, index) => (
-                            <li key={index}>
-                                {occupant.name} - {occupant.role} ({occupant.skillSet})
+                            <li key={index} className="flex items-center justify-between">
+                                <span>
+                                    {occupant.name} - {occupant.role} ({occupant.skillSet})
+                                </span>
+                                <button
+                                    onClick={() => deleteOccupant(room.roomNumber, occupant._id)}
+                                    className="text-red-500 hover:text-red-700"
+                                >
+                                    <FaTrashAlt />
+                                </button>
                             </li>
                         ))}
                     </ul>
