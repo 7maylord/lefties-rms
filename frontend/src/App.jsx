@@ -1,4 +1,3 @@
-import React from 'react';
 import RoomManager from './components/RoomManager';
 
 function App() {

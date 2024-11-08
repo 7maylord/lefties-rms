@@ -1,17 +1,25 @@
-# Like Button API
+# Lefties Room Allocation System
 
-This project is a simple API for an article "Like" button feature. Users can view the total number of likes on an article and increment it by pressing a button. The project uses Express.js, MongoDB, and EJS templating to serve views and provides REST API endpoints for interacting with the like feature.
+This project is a dynamic room allocation system that efficiently manages the team assignments within these constraints:
+. The project uses Express.js, MongoDB, and EJS templating to serve views and provides REST API endpoints for interacting with the like feature.
 
 
 ## Requirements
 
 - npm
-- Node.js
-- Express.js
-- MongoDB (Mongoose for ODM)
-- EJS for templating views
-- Nodemon
-- Jest and Supertest for testing
+-   **Frontend**: React, and TypeScript
+-   **Backend**: Node.js, TypeScript, Express, MongoDB, and Redis.
+-   **Deployment**: Vercel
+
+## Usage
+
+### Web Interface
+
+-   Frontend application is deployed  at [lefties-rms.vercel.app](https://lefties-rms.vercel.app/)
+
+### API
+
+- Backend is deployed at [lefties-rms.onrender.com](https://lefties-rms.onrender.com/api)
 
 
 ## Setup and Installation
@@ -19,37 +27,61 @@ This project is a simple API for an article "Like" button feature. Users can vie
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/7maylord/norebase-challenge.git
-   cd norebase-challenge
+   git clone https://github.com/7maylord/urlchop.git
+   cd urlchop
 
 2. Install dependencies:
     ```sh
-    npm install
+    cd client-app && npm install
+    cd ../server-app && npm install
     ```
 
 3. Set up environment variables:
-    Create a `.env` file in the root directory and add the following:
+    Create a `.env` file in the server-app directory and add the following:
     ```env
     # Server configuration
     PORT=3030
 
     # Database configuration
-    MONGODB_URI=mongodb://localhost:27017/yourdbname
+    REDIS_URL=redis://localhost:6379
+    REDIS_HOST=localhost
+    REDIS_PORT=6379
+    REDIS_PASSWORD=your_redis_password
+    MONGODB_URI=mongodb://localhost:27017/urlchop
+
+    # Rate limiter configuration
+    RATE_LIMIT_WINDOW=15
+    RATE_LIMIT_MAX=100
+        
+    JWT_SECRET=your_jwt_secret
+    QR_API_URL=https://api.qrserver.com/v1/create-qr-code/
+      ```
+    
+    Create a `.env` file in the client-app directory and add the following:
+    ```env
+    VITE_APP_ENV=development
+
+    #this is your backend server
+    VITE_API_URL=http://localhost:3030/api 
+
+    #this is your frontend server
+    VITE_APP_URL=http://localhost:5174  
     ```
 
-4. Development Mode: To run the server in development mode.
+4. Build the Project:
     ```sh
-   npm run dev
+    # Backend Server
+    npm run build
+    # Frontend Server
+    npm run build
     ```
-
-5. Access the API: The server should now be running on http://localhost:3030.
-
-6. Running Tests: 
-To run the tests, use:
-
-```bash
-npm run test
-```
+5. Development Mode: To run the server in development mode with hot-reloading.
+    ```sh
+    # Backend Server
+    npm run start
+    # Frontend Server
+    npm run dev
+    ```
 
 ## Usage
 ### Endpoints
