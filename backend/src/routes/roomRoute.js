@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const roomController = require('../controllers/roomController');
+const Room = require('../models/room');
 
 //For room routes
-router.post('/rooms/:roomId/addOccupant', roomController.addOccupantToRoom);
+router.post('/rooms/:roomNumber/addOccupant', roomController.addOccupantToRoom);
 
 // Fetch all rooms
 router.get('/rooms', async (req, res) => {
