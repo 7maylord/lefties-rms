@@ -9,9 +9,8 @@ const OccupantSchema = new mongoose.Schema({
 
 const RoomSchema = new mongoose.Schema({
     roomNumber: { type: Number, required: true, unique: true },
-    capacity: { type: Number, default: 4 },
     occupants: [OccupantSchema],
-    genderAssigned: { type: String, enum: ['male', 'female'], default: null },
+    genderAssigned: { type: String, enum: ['male', 'female', null], default: null },
 });
 
 module.exports = mongoose.model('Room', RoomSchema);

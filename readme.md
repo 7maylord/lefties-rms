@@ -70,6 +70,27 @@ This project is a dynamic room allocation system that efficiently manages the te
     # Frontend Server
     npm run dev
     ```
+## Database Seeding
+Make sure to seed database before development use. Check the config folder in the backend
+
+    ```sh
+    mongoose.connection.on('connected', async () => {
+            console.log('MongoDB connection successful');
+            ////Database seeding Do this once
+            // try {
+            //     // Create rooms with unique room numbers
+            //     for (let i = 1; i <= 6; i++) {
+            //         await Room.create({ roomNumber: i, occupants: [] });
+            //     }
+            //     console.log('Rooms created successfully');
+            // } catch (err) {
+            //     console.error('Error creating rooms:', err);
+            // } finally {
+            //     // Close the connection after seeding is done
+            //     mongoose.connection.close();
+            // }
+        });
+    ```
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any changes.

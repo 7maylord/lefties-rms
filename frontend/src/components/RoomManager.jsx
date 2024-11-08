@@ -3,7 +3,7 @@ import { axiosInstance } from '../axiosInstance';
 
 const RoomManager = () => {
     const [rooms, setRooms] = useState([]);
-    const [form, setForm] = useState({ name: '', role: 'developer', skill: 'smartContract', gender: 'male' });
+    const [form, setForm] = useState({ name: '', role: 'developer', skillSet: 'smartContract', gender: 'male' });
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [error, setError] = useState('');
 
@@ -20,7 +20,7 @@ const RoomManager = () => {
         try {
             const res = await axiosInstance.post(`/rooms/${roomNumber}/addOccupant`, form);
             setRooms(rooms.map(room => (room.roomNumber === roomNumber ? res.data : room)));
-            setForm({ name: '', role: 'developer', skill: 'smartContract', gender: 'male' });
+            setForm({ name: '', role: 'developer', skillSet: 'smartContract', gender: 'male' });
             setError('');
         } catch (err) {
             setError(err.response.data.message);
@@ -29,21 +29,21 @@ const RoomManager = () => {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Room Allocation System</h1>
+            <h1 className="text-2xl font-bold mb-4">Lefties Room Allocation System</h1>
             {rooms.map(room => (
-                <div key={room._id} className="mb-4 p-4 border rounded">
-                    <h2 className="text-xl font-semibold">Room {room._id}</h2>
-                    <p>Gender Restriction: {room.genderRestriction || 'None'}</p>
+                <div key={room.roomNumber} className="mb-4 p-4 border rounded">
+                    <h2 className="text-xl font-semibold">Room {room.roomNumber}</h2>
+                    <p>Gender Assigned: {room.genderAssigned || 'None'}</p>
                     <ul>
                         {room.occupants.map((occupant, index) => (
                             <li key={index}>
-                                {occupant.name} - {occupant.role} ({occupant.skill})
+                                {occupant.name} - {occupant.role} ({occupant.skillSet})
                             </li>
                         ))}
                     </ul>
                     <button
                         className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
-                        onClick={() => setSelectedRoom(room._id)}
+                        onClick={() => setSelectedRoom(room.roomNumber)}
                     >
                         Add Occupant
                     </button>
@@ -77,8 +77,8 @@ const RoomManager = () => {
                             </select>
                             <select
                                 className="mb-2 p-2 border rounded w-full"
-                                value={form.skill}
-                                onChange={(e) => setForm({ ...form, skill: e.target.value })}
+                                value={form.skillSet}
+                                onChange={(e) => setForm({ ...form, skillSet: e.target.value })}
                             >
                                 <option value="smartContract">Smart Contract</option>
                                 <option value="frontend">Frontend</option>

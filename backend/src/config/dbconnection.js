@@ -7,7 +7,7 @@ function connectionToMongodb() {
 
     mongoose.connection.on('connected', async () => {
         console.log('MongoDB connection successful');
-        //Database seeding Do this once
+        ////Database seeding Do this once
         // try {
         //     // Create rooms with unique room numbers
         //     for (let i = 1; i <= 6; i++) {
