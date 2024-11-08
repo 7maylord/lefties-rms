@@ -45,6 +45,7 @@ const RoomManager = () => {
                 } : room
             ));
             alert('Occupant deleted successfully.');
+            fetchRooms();
         } catch (err) {
             setError(err.response ? err.response.data.message : 'An error occurred');
         }

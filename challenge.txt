@@ -1,0 +1,23 @@
+Question
+Web3Bridge has recently acquired a highly specialized developer training facility in Lekki, aimed at hosting and managing intensive project development sessions. The facility will be dedicated to the design, development, and deployment of complex outsourced projects, with the following features:
+- A large conference room (capacity of 500 people)
+- Six bedrooms (capacity of 4 people each)
+A maximum of 12 people can stay at the facility overnight at any one time, selected from a pool of 25 team members:
+- 5 facilitators (proficient in all development skill sets)
+- 20 developers with the following specializations:
+    - 10 proficient in Smart Contract Development
+    - 5 proficient in frontend technologies
+    - 5 proficient in server-side architecture
+Using HTML, CSS, and JavaScript or any Javascript framework, design a dynamic room allocation system that efficiently manages the team assignments within these constraints:
+- Each bedroom should accommodate 1 facilitator and 3 developers of different skill sets.
+- The system must prevent overcapacity, showing an error when a bedroom is full.
+-The system should restrict any bedroom from having more than 2 developers with the same skill set.
+-Each bedroom should display a dialogue box allowing for the addition of a person’s name, role (facilitator or developer), and skill set.
+-Facilitators may be assigned to any room but must oversee a balanced team of developers with varied skills.
+
+Additional Challenge:
+-Implement a gender-based accommodation option. For this, rooms should be labeled as male or female based on the first occupant, and subsequent additions to the room should follow this gender assignment (e.g., if a female is assigned first to a room, only females can be added afterward). This gender feature is optional, but implementing it will demonstrate advanced functionality and make your solution stand out.
+
+NOTE:
+- Include a detailed README that explains how to make use of the web app you built.
+- Using TypeScript or React.JS is a plus
