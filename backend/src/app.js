@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // Routes
 app.use("/api", roomRoute);
 
@@ -17,7 +16,7 @@ app.use("/api", roomRoute);
 app.get('/', (req, res) => {
   res.status(200);
   res.json({
-    message: "Welcome to Olumide Like Button API",
+    message: "Welcome to Lefties API",
   });
 });
 
