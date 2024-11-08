@@ -1,5 +1,5 @@
 const express = require("express");
-
+const roomRoute = require('./routes/roomRoute')
 
 const app = express();
 
@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Routes
-//app.use("/api", articleRoutes);
+app.use("/api", roomRoute);
 
 // renders the home page
 app.get('/', (req, res) => {
