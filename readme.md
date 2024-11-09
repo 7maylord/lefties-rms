@@ -42,7 +42,7 @@ This project is a dynamic room allocation system that efficiently manages the te
     PORT=4000
 
     # Database configuration
-    MONGODB_URI=mongodb://localhost:27017/urlchop
+    MONGODB_URI=mongodb://localhost:27017/yourdbname
     ```
     
     Create a `.env` file in the client-app directory and add the following:

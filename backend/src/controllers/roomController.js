@@ -15,6 +15,11 @@ const getRooms = async (req, res) => {
 const addOccupantToRoom = async (req, res) => {
   const { roomNumber } = req.params;
   const { name, role, skillSet, gender } = req.body;
+
+   // Input validation
+   if (!name || !role || !skillSet || !gender) {
+    return res.status(400).json({ message: "Required fields are missing" });
+  }
   try {
     const room = await Room.findOne({ roomNumber });
 
@@ -30,7 +35,7 @@ const addOccupantToRoom = async (req, res) => {
     if (room.genderAssigned && room.genderAssigned !== gender) {
       return res
         .status(400)
-        .json({ message: "Gender mismatch for room assignment" });
+        .json({ message: `Room assigned gender: ${room.genderAssigned}` });
     }
 
     // Assign gender if not already set
@@ -67,7 +72,8 @@ const addOccupantToRoom = async (req, res) => {
     await room.save();
     res.status(200).json(room);
   } catch (error) {
-    res.status(500).json({ message: "Server error", error });
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
